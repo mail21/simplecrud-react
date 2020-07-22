@@ -9,8 +9,8 @@ const data = [
     {
         id: 2,
         cashie : "Kevin",
-        product : "Kopi",
-        category : "Drinks",
+        product : "Cruisant",
+        category : "Food",
         price : "2000"
     },
     {

@@ -1,7 +1,7 @@
 import React from "react";
 import data from './../data';
-import editicon from './../img/editicon.png';
 import trashIcon from "./../img/trashIcon.png";
+import ModalEdit from './ModalEdit';
 
 
 const Row = ({cashie,product,category,price,no,clickDelete,id}) => {
@@ -13,7 +13,12 @@ const Row = ({cashie,product,category,price,no,clickDelete,id}) => {
            <td>{category}</td>
            <td>{price}</td>
            <td>
-              <a><img src={editicon} width="40" alt="editicon" /></a>
+              <ModalEdit 
+                id = {id}
+                cashie={cashie}  
+                product={product} 
+                category={category} 
+                price={price}  />
               <a onClick={clickDelete} data-id={id}><img width="40" src={trashIcon} alt="trash"  /></a>
            </td>
        </tr>
@@ -26,16 +31,18 @@ class Table extends React.Component{
         this.state = {
             data : data
         }
-        console.log(data);
     }
 
     clickDelete = (event) => {
-        console.log(event.target.parentNode.dataset.id)
         let filteredData = this.state.data.filter((el)=>{
             return el.id != event.target.parentNode.dataset.id;
         })
-        console.log("filter",filteredData);
+        console.log(filteredData);
         this.setState({data: filteredData});
+    }
+
+    refreshData = () =>{
+        this.setState({data:data})
     }
 
     
@@ -69,6 +76,7 @@ class Table extends React.Component{
                        })}
                     </tbody>
                 </table>
+                <button onClick={this.refreshData}>Refresh</button>
             </div>
         );
     }
